@@ -1,3 +1,6 @@
+Note: This is going to be a port of the Adafruit ILI9341 library adapted for STM32
+
+--------------------------------------------------------------------
 This is the core graphics library for all our displays, providing a common set of graphics primitives (points, lines, circles, etc.).  It needs to be paired with a hardware-specific library for each display device we carry (to handle the lower-level functions).
 
 Adafruit invests time and resources providing this open source code, please support Adafruit and open-source hardware by purchasing products from Adafruit!
