@@ -45,7 +45,7 @@ void Adafruit_GFX_Init(GFX_Object *Object)
 	Object->cursor_y  = Object->cursor_x    = 0;
 	Object->textsize  = 1;
 	Object->textcolor = Object->textbgcolor = 0xFFFF;
-	Object->wrap      = true;
+	Object->wrap      = True;
 }
 
 /* Draw a circle outline */
@@ -453,7 +453,7 @@ void Adafruit_GFX_setTextSize(GFX_Object *Object, uint8_t s)
 	Object->textsize = (s > 0) ? s : 1;
 }
 
-void Adafruit_GFX_setTextColorTransparentBg(GFX_Object *Object, uint16_t c)
+void Adafruit_GFX_setTextColor(GFX_Object *Object, uint16_t c)
 {
 	/*
 	 * For 'transparent' background, we'll set the bg
@@ -462,7 +462,7 @@ void Adafruit_GFX_setTextColorTransparentBg(GFX_Object *Object, uint16_t c)
 	Object->textcolor = Object->textbgcolor = c;
 }
 
-void Adafruit_GFX_setTextColor(GFX_Object *Object, uint16_t c, uint16_t b)
+void Adafruit_GFX_setTextColorAndBackground(GFX_Object *Object, uint16_t c, uint16_t b)
 {
 	Object->textcolor   = c;
 	Object->textbgcolor = b;

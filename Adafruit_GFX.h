@@ -10,13 +10,13 @@
 
 /* Typedefs ------------------------------------------------------------------*/
 typedef enum
-{ false = 0,
-  true = !false
+{ False = 0,
+  True = !False
 } boolean;
 
 typedef struct
 {
-	const int16_t WIDTH, HEIGHT;	/* This is the 'raw' display w/h - never changes */
+	int16_t WIDTH, HEIGHT;			/* This is the 'raw' display w/h - never changes */
 	int16_t _width, _height;		/* Display w/h as modified by current rotation */
 	int16_t cursor_x, cursor_y;
 	uint16_t textcolor, textbgcolor;
@@ -35,7 +35,6 @@ void Adafruit_GFX_fillCircle(GFX_Object *Object, int16_t x0, int16_t y0, int16_t
 void Adafruit_GFX_fillCircleHelper(GFX_Object *Object, int16_t x0, int16_t y0, int16_t r, uint8_t cornername, int16_t delta, uint16_t color);
 
 void Adafruit_GFX_drawLine(GFX_Object *Object, int16_t x0, int16_t y0, int16_t x1, int16_t y1, uint16_t color);
-
 void Adafruit_GFX_drawRect(GFX_Object *Object, int16_t x, int16_t y, int16_t w, int16_t h, uint16_t color);
 
 void Adafruit_GFX_drawFastVLine(GFX_Object *Object, int16_t x, int16_t y, int16_t h, uint16_t color);
@@ -55,8 +54,8 @@ void Adafruit_GFX_drawChar(GFX_Object *Object, int16_t x, int16_t y, unsigned ch
 
 void Adafruit_GFX_setCursor(GFX_Object *Object, int16_t x, int16_t y);
 void Adafruit_GFX_setTextSize(GFX_Object *Object, uint8_t s);
-void Adafruit_GFX_setTextColorTransparentBg(GFX_Object *Object, uint16_t c);
-void Adafruit_GFX_setTextColor(GFX_Object *Object, uint16_t c, uint16_t b);
+void Adafruit_GFX_setTextColor(GFX_Object *Object, uint16_t c);
+void Adafruit_GFX_setTextColorAndBackground(GFX_Object *Object, uint16_t c, uint16_t b);
 void Adafruit_GFX_setTextWrap(GFX_Object *Object, boolean w);
 
 uint8_t Adafruit_GFX_getRotation(GFX_Object *Object);
