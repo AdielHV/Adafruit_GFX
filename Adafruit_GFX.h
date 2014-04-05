@@ -49,6 +49,14 @@ void Adafruit_GFX_fillRoundRect(GFX_Object *Object, int32_t x, int32_t y, int32_
 void Adafruit_GFX_drawTriangle(GFX_Object *Object, int32_t x0, int32_t y0, int32_t x1, int32_t y1, int32_t x2, int32_t y2, uint16_t color);
 void Adafruit_GFX_fillTriangle(GFX_Object *Object, int32_t x0, int32_t y0, int32_t x1, int32_t y1, int32_t x2, int32_t y2, uint16_t color);
 
+void Adafruit_GFX_print(GFX_Object *Object, const char *String);
+void Adafruit_GFX_println(GFX_Object *Object, const char *String);
+void Adafruit_GFX_printDigit(GFX_Object *Object, uint8_t Digit);
+void Adafruit_GFX_printDigitln(GFX_Object *Object, uint8_t Digit);
+void Adafruit_GFX_printHex(GFX_Object *Object, uint8_t Byte, boolean Prefix);
+void Adafruit_GFX_printHexln(GFX_Object *Object, uint8_t Byte, boolean Prefix);
+void Adafruit_GFX_printNumber(GFX_Object *Object, uint32_t Number, boolean Spaces);
+void Adafruit_GFX_printNumberln(GFX_Object *Object, uint32_t Number, boolean Spaces);
 void Adafruit_GFX_write(GFX_Object *Object, uint8_t c);
 void Adafruit_GFX_drawChar(GFX_Object *Object, int32_t x, int32_t y, unsigned char c, uint16_t color, uint16_t bg, uint8_t size);
 

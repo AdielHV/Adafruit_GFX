@@ -380,6 +380,141 @@ void Adafruit_GFX_fillTriangle(GFX_Object *Object, int32_t x0, int32_t y0, int32
 //	}
 //}
 
+void Adafruit_GFX_print(GFX_Object *Object, const char *String)
+{
+	while (*String != 0x00)
+	{
+		Adafruit_GFX_write(Object, *String);
+		String++;
+	}
+}
+
+void Adafruit_GFX_println(GFX_Object *Object, const char *String)
+{
+	Adafruit_GFX_print(Object, String);
+	Adafruit_GFX_print(Object, "\n");
+}
+
+/**
+ * @brief	Write a single digit as a character
+ * @param	Object: Pointer to the object
+ * @param	Digit: The digit to write. Can be 0 to 15 -> 0-F as characters
+ * @retval	None
+ */
+void Adafruit_GFX_printDigit(GFX_Object *Object, uint8_t Digit)
+{
+	if (Digit < 10)
+	{
+		uint8_t character = 48 + Digit;
+		Adafruit_GFX_write(Object, character);
+	}
+	else if (Digit < 16)
+	{
+		uint8_t character = 55 + Digit;
+		Adafruit_GFX_write(Object, character);
+	}
+}
+
+void Adafruit_GFX_printDigitln(GFX_Object *Object, uint8_t Digit)
+{
+	Adafruit_GFX_printDigit(Object, Digit);
+	Adafruit_GFX_print(Object, "\n");
+}
+
+void Adafruit_GFX_printHex(GFX_Object *Object, uint8_t Byte, boolean Prefix)
+{
+	if (Prefix) Adafruit_GFX_print(Object, "0x");
+	Adafruit_GFX_printDigit(Object, (Byte >> 4) & 0xF);
+	Adafruit_GFX_printDigit(Object, Byte & 0xF);
+}
+
+void Adafruit_GFX_printHexln(GFX_Object *Object, uint8_t Byte, boolean Prefix)
+{
+	Adafruit_GFX_printHex(Object, Byte, Prefix);
+	Adafruit_GFX_print(Object, "\n");
+}
+
+void Adafruit_GFX_printNumber(GFX_Object *Object, uint32_t Number, boolean Spaces)
+{
+	uint8_t ones, tens, hundreds, thousands, tenThousands, hundredThousands, millions, tenMillions, hundredMillions, billions;
+
+	billions = Number / 1000000000;
+	Number = Number % 1000000000;
+
+	hundredMillions = Number / 100000000;
+	Number = Number % 100000000;
+
+	tenMillions = Number / 10000000;
+	Number = Number % 10000000;
+
+	millions = Number / 1000000;
+	Number = Number % 1000000;
+
+	hundredThousands = Number / 100000;
+	Number = Number % 100000;
+
+	tenThousands = Number / 10000;
+	Number = Number % 10000;
+
+	thousands = Number / 1000;
+	Number = Number % 1000;
+
+	hundreds = Number / 100;
+	Number = Number % 100;
+
+	tens = Number / 10;
+	Number = Number % 10;
+
+	ones = Number;
+
+	if (billions)
+	{
+		Adafruit_GFX_printDigit(Object, (uint8_t)billions);
+		if (Spaces) Adafruit_GFX_print(Object, " ");
+	}
+	if (hundredMillions || billions)
+	{
+		Adafruit_GFX_printDigit(Object, (uint8_t)hundredMillions);
+	}
+	if (tenMillions || hundredMillions || billions)
+	{
+		Adafruit_GFX_printDigit(Object, (uint8_t)tenMillions);
+	}
+	if (millions || tenMillions || hundredMillions || billions)
+	{
+		Adafruit_GFX_printDigit(Object, (uint8_t)millions);
+		if (Spaces) Adafruit_GFX_print(Object, " ");
+	}
+	if (hundredThousands || millions || tenMillions || hundredMillions || billions)
+	{
+		Adafruit_GFX_printDigit(Object, (uint8_t)hundredThousands);
+	}
+	if (tenThousands || hundredThousands || millions || tenMillions || hundredMillions || billions)
+	{
+		Adafruit_GFX_printDigit(Object, (uint8_t)tenThousands);
+	}
+	if (thousands || tenThousands || hundredThousands || millions || tenMillions || hundredMillions || billions)
+	{
+		Adafruit_GFX_printDigit(Object, (uint8_t)thousands);
+		if (Spaces) Adafruit_GFX_print(Object, " ");
+	}
+	if (hundreds || thousands || tenThousands || hundredThousands || millions || tenMillions || hundredMillions || billions)
+	{
+		Adafruit_GFX_printDigit(Object, (uint8_t)hundreds);
+	}
+	if (tens || hundreds || thousands || tenThousands || hundredThousands || millions || tenMillions || hundredMillions || billions)
+	{
+		Adafruit_GFX_printDigit(Object, (uint8_t)tens);
+	}
+	Adafruit_GFX_printDigit(Object, (uint8_t)ones);
+}
+
+void Adafruit_GFX_printNumberln(GFX_Object *Object, uint32_t Number, boolean Spaces)
+{
+	Adafruit_GFX_printNumber(Object, Number, Spaces);
+	Adafruit_GFX_print(Object, "\n");
+}
+
 void Adafruit_GFX_write(GFX_Object *Object, uint8_t c)
 {
 	if (c == '\n')
