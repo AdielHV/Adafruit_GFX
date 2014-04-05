@@ -49,13 +49,13 @@ void Adafruit_GFX_Init(GFX_Object *Object)
 }
 
 /* Draw a circle outline */
-void Adafruit_GFX_drawCircle(GFX_Object *Object, int16_t x0, int16_t y0, int16_t r, uint16_t color)
+void Adafruit_GFX_drawCircle(GFX_Object *Object, int32_t x0, int32_t y0, int32_t r, uint16_t color)
 {
-	int16_t f = 1 - r;
-	int16_t ddF_x = 1;
-	int16_t ddF_y = -2 * r;
-	int16_t x = 0;
-	int16_t y = r;
+	int32_t f = 1 - r;
+	int32_t ddF_x = 1;
+	int32_t ddF_y = -2 * r;
+	int32_t x = 0;
+	int32_t y = r;
 
 	Object->drawPixel(x0  , y0+r, color);
 	Object->drawPixel(x0  , y0-r, color);
@@ -85,13 +85,13 @@ void Adafruit_GFX_drawCircle(GFX_Object *Object, int16_t x0, int16_t y0, int16_t
 	}
 }
 
-void Adafruit_GFX_drawCircleHelper(GFX_Object *Object, int16_t x0, int16_t y0, int16_t r, uint8_t cornername, uint16_t color)
+void Adafruit_GFX_drawCircleHelper(GFX_Object *Object, int32_t x0, int32_t y0, int32_t r, uint8_t cornername, uint16_t color)
 {
-	int16_t f     = 1 - r;
-	int16_t ddF_x = 1;
-	int16_t ddF_y = -2 * r;
-	int16_t x     = 0;
-	int16_t y     = r;
+	int32_t f     = 1 - r;
+	int32_t ddF_x = 1;
+	int32_t ddF_y = -2 * r;
+	int32_t x     = 0;
+	int32_t y     = r;
 
 	while (x < y)
 	{
@@ -127,20 +127,20 @@ void Adafruit_GFX_drawCircleHelper(GFX_Object *Object, int16_t x0, int16_t y0, i
 	}
 }
 
-void Adafruit_GFX_fillCircle(GFX_Object *Object, int16_t x0, int16_t y0, int16_t r, uint16_t color)
+void Adafruit_GFX_fillCircle(GFX_Object *Object, int32_t x0, int32_t y0, int32_t r, uint16_t color)
 {
 	Adafruit_GFX_drawFastVLine(Object, x0, y0-r, 2*r+1, color);
 	Adafruit_GFX_fillCircleHelper(Object, x0, y0, r, 3, 0, color);
 }
 
 /* Used to do circles and roundrects */
-void Adafruit_GFX_fillCircleHelper(GFX_Object *Object, int16_t x0, int16_t y0, int16_t r, uint8_t cornername, int16_t delta, uint16_t color)
+void Adafruit_GFX_fillCircleHelper(GFX_Object *Object, int32_t x0, int32_t y0, int32_t r, uint8_t cornername, int32_t delta, uint16_t color)
 {
-	int16_t f     = 1 - r;
-	int16_t ddF_x = 1;
-	int16_t ddF_y = -2 * r;
-	int16_t x     = 0;
-	int16_t y     = r;
+	int32_t f     = 1 - r;
+	int32_t ddF_x = 1;
+	int32_t ddF_y = -2 * r;
+	int32_t x     = 0;
+	int32_t y     = r;
 
 	while (x < y)
 	{
@@ -168,9 +168,9 @@ void Adafruit_GFX_fillCircleHelper(GFX_Object *Object, int16_t x0, int16_t y0, i
 }
 
 /* Bresenham's algorithm - thx wikpedia */
-void Adafruit_GFX_drawLine(GFX_Object *Object, int16_t x0, int16_t y0, int16_t x1, int16_t y1, uint16_t color)
+void Adafruit_GFX_drawLine(GFX_Object *Object, int32_t x0, int32_t y0, int32_t x1, int32_t y1, uint16_t color)
 {
-	int16_t steep = abs(y1 - y0) > abs(x1 - x0);
+	int32_t steep = abs(y1 - y0) > abs(x1 - x0);
 	if (steep)
 	{
 		swap(x0, y0);
@@ -183,12 +183,12 @@ void Adafruit_GFX_drawLine(GFX_Object *Object, int16_t x0, int16_t y0, int16_t x
 		swap(y0, y1);
 	}
 
-	int16_t dx, dy;
+	int32_t dx, dy;
 	dx = x1 - x0;
 	dy = abs(y1 - y0);
 
-	int16_t err = dx / 2;
-	int16_t ystep;
+	int32_t err = dx / 2;
+	int32_t ystep;
 
 	if (y0 < y1)
 	{
@@ -219,7 +219,7 @@ void Adafruit_GFX_drawLine(GFX_Object *Object, int16_t x0, int16_t y0, int16_t x
 }
 
 /* Draw a rectangle */
-void Adafruit_GFX_drawRect(GFX_Object *Object, int16_t x, int16_t y, int16_t w, int16_t h, uint16_t color)
+void Adafruit_GFX_drawRect(GFX_Object *Object, int32_t x, int32_t y, int32_t w, int32_t h, uint16_t color)
 {
 	Adafruit_GFX_drawFastHLine(Object, x, y, w, color);
 	Adafruit_GFX_drawFastHLine(Object, x, y+h-1, w, color);
@@ -227,25 +227,25 @@ void Adafruit_GFX_drawRect(GFX_Object *Object, int16_t x, int16_t y, int16_t w, 
 	Adafruit_GFX_drawFastVLine(Object, x+w-1, y, h, color);
 }
 
-void Adafruit_GFX_drawFastVLine(GFX_Object *Object, int16_t x, int16_t y, int16_t h, uint16_t color)
+void Adafruit_GFX_drawFastVLine(GFX_Object *Object, int32_t x, int32_t y, int32_t h, uint16_t color)
 {
 	// TODO: Subclassing???
 	// Update in subclasses if desired!
 	Adafruit_GFX_drawLine(Object, x, y, x, y+h-1, color);
 }
 
-void Adafruit_GFX_drawFastHLine(GFX_Object *Object, int16_t x, int16_t y, int16_t w, uint16_t color)
+void Adafruit_GFX_drawFastHLine(GFX_Object *Object, int32_t x, int32_t y, int32_t w, uint16_t color)
 {
 	// TODO: Subclassing???
 	// Update in subclasses if desired!
 	Adafruit_GFX_drawLine(Object, x, y, x+w-1, y, color);
 }
 
-void Adafruit_GFX_fillRect(GFX_Object *Object, int16_t x, int16_t y, int16_t w, int16_t h, uint16_t color)
+void Adafruit_GFX_fillRect(GFX_Object *Object, int32_t x, int32_t y, int32_t w, int32_t h, uint16_t color)
 {
 	// TODO: Subclassing???
 	// Update in subclasses if desired!
-	for (int16_t i=x; i<x+w; i++)
+	for (int32_t i=x; i<x+w; i++)
 	{
 		Adafruit_GFX_drawFastVLine(Object, i, y, h, color);
 	}
@@ -257,7 +257,7 @@ void Adafruit_GFX_fillScreen(GFX_Object *Object, uint16_t color)
 }
 
 /* Draw a rounded rectangle */
-void Adafruit_GFX_drawRoundRect(GFX_Object *Object, int16_t x, int16_t y, int16_t w, int16_t h, int16_t r, uint16_t color)
+void Adafruit_GFX_drawRoundRect(GFX_Object *Object, int32_t x, int32_t y, int32_t w, int32_t h, int32_t r, uint16_t color)
 {
 	/* smarter version */
 	Adafruit_GFX_drawFastHLine(Object, x+r  , y    , w-2*r, color); // Top
@@ -272,7 +272,7 @@ void Adafruit_GFX_drawRoundRect(GFX_Object *Object, int16_t x, int16_t y, int16_
 }
 
 /* Fill a rounded rectangle */
-void Adafruit_GFX_fillRoundRect(GFX_Object *Object, int16_t x, int16_t y, int16_t w, int16_t h, int16_t r, uint16_t color)
+void Adafruit_GFX_fillRoundRect(GFX_Object *Object, int32_t x, int32_t y, int32_t w, int32_t h, int32_t r, uint16_t color)
 {
 	// smarter version
 	Adafruit_GFX_fillRect(Object, x+r, y, w-2*r, h, color);
@@ -283,7 +283,7 @@ void Adafruit_GFX_fillRoundRect(GFX_Object *Object, int16_t x, int16_t y, int16_
 }
 
 /* Draw a triangle */
-void Adafruit_GFX_drawTriangle(GFX_Object *Object, int16_t x0, int16_t y0, int16_t x1, int16_t y1, int16_t x2, int16_t y2, uint16_t color)
+void Adafruit_GFX_drawTriangle(GFX_Object *Object, int32_t x0, int32_t y0, int32_t x1, int32_t y1, int32_t x2, int32_t y2, uint16_t color)
 {
 	Adafruit_GFX_drawLine(Object, x0, y0, x1, y1, color);
 	Adafruit_GFX_drawLine(Object, x1, y1, x2, y2, color);
@@ -291,9 +291,9 @@ void Adafruit_GFX_drawTriangle(GFX_Object *Object, int16_t x0, int16_t y0, int16
 }
 
 /* Fill a triangle */
-void Adafruit_GFX_fillTriangle(GFX_Object *Object, int16_t x0, int16_t y0, int16_t x1, int16_t y1, int16_t x2, int16_t y2, uint16_t color)
+void Adafruit_GFX_fillTriangle(GFX_Object *Object, int32_t x0, int32_t y0, int32_t x1, int32_t y1, int32_t x2, int32_t y2, uint16_t color)
 {
-	int16_t a, b, y, last;
+	int32_t a, b, y, last;
 
 	// Sort coordinates by Y order (y2 >= y1 >= y0)
 	if (y0 > y1) {
@@ -316,7 +316,7 @@ void Adafruit_GFX_fillTriangle(GFX_Object *Object, int16_t x0, int16_t y0, int16
 		return;
 	}
 
-	int16_t
+	int32_t
 	dx01 = x1 - x0,
 	dy01 = y1 - y0,
 	dx02 = x2 - x0,
@@ -367,9 +367,9 @@ void Adafruit_GFX_fillTriangle(GFX_Object *Object, int16_t x0, int16_t y0, int16
 }
 
 /* TODO: Not implemented yet */
-//void Adafruit_GFX_drawBitmap(int16_t x, int16_t y, const uint8_t *bitmap, int16_t w, int16_t h, uint16_t color)
+//void Adafruit_GFX_drawBitmap(int32_t x, int32_t y, const uint8_t *bitmap, int32_t w, int32_t h, uint16_t color)
 //{
-//  int16_t i, j, byteWidth = (w + 7) / 8;
+//  int32_t i, j, byteWidth = (w + 7) / 8;
 //
 //	for(j=0; j<h; j++) {
 //		for(i=0; i<w; i++ ) {
@@ -403,7 +403,7 @@ void Adafruit_GFX_write(GFX_Object *Object, uint8_t c)
 }
 
 /* Draw a character */
-void Adafruit_GFX_drawChar(GFX_Object *Object, int16_t x, int16_t y, unsigned char c, uint16_t color, uint16_t bg, uint8_t size)
+void Adafruit_GFX_drawChar(GFX_Object *Object, int32_t x, int32_t y, unsigned char c, uint16_t color, uint16_t bg, uint8_t size)
 {
 	if ((x >= Object->_width)		||	// Clip right
 	   (y >= Object->_height)		||	// Clip bottom
@@ -442,7 +442,7 @@ void Adafruit_GFX_drawChar(GFX_Object *Object, int16_t x, int16_t y, unsigned ch
 	}
 }
 
-void Adafruit_GFX_setCursor(GFX_Object *Object, int16_t x, int16_t y)
+void Adafruit_GFX_setCursor(GFX_Object *Object, int32_t x, int32_t y)
 {
 	Object->cursor_x = x;
 	Object->cursor_y = y;
@@ -496,12 +496,12 @@ void Adafruit_GFX_setRotation(GFX_Object *Object, uint8_t x)
 }
 
 /* Return the size of the display (per current rotation) */
-int16_t Adafruit_GFX_width(GFX_Object *Object)
+int32_t Adafruit_GFX_width(GFX_Object *Object)
 {
 	return Object->_width;
 }
 
-int16_t Adafruit_GFX_height(GFX_Object *Object)
+int32_t Adafruit_GFX_height(GFX_Object *Object)
 {
 	return Object->_height;
 }
