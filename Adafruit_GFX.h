@@ -3,7 +3,11 @@
 #define _ADAFRUIT_GFX_H
 
 /* Includes ------------------------------------------------------------------*/
+#if defined(STM32F40_41xxx)
+#include "stm32f4xx.h"
+#elif defined(STM32F10X_MD) || defined(STM32F10X_MD_VL)
 #include "stm32f10x.h"
+#endif
 
 /* Defines -------------------------------------------------------------------*/
 #define swap(a, b) { int32_t t = a; a = b; b = t; }
